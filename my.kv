@@ -3,6 +3,8 @@
     Login:
 
 
+# **********************************************************************************************************************
+
 <MainMenu>:
     name : "mainmenu"
     username : username
@@ -12,7 +14,7 @@
         size_hint : 0.5,0.5
         #pos : (300,300)
         pos_hint : {'x':0.5, 'y':0.5}
-        background_color : 1,0,0,1
+        background_color : [1,0,0,1]
         Label :
             text : "Username:-->> "
             font_size : 25
@@ -22,7 +24,10 @@
 
         TextInput :
             id : username
+            write_tab : False
             multiline : False
+            background_color : [0.5,0.5,0,1]
+            focus : True
             size_hint : 0.24, 0.1
             pos : 600,430
 
@@ -35,7 +40,9 @@
 
         TextInput :
             id : password
+            write_tab : False
             multiline : False
+            password : True
             size_hint : 0.24, 0.1
             pos : 600,350
 
@@ -44,7 +51,7 @@
             text : "Login"
             size_hint : (0.2, 0.1)
             pos : 450, 250
-            on_press : root.manager.current='login'
+            on_press : root.check()
 
 
 
@@ -52,13 +59,13 @@
             text : "Signup"
             size_hint : (0.2, 0.1)
             pos : 650, 250
-            on_press  : root.s()
 
+
+# *********************************************************************************************************************
 
 <Login>:
     name : 'login'
     Label :
         text : "hello"
-
 
 

@@ -7,6 +7,9 @@ from kivy.uix.button import Button
 from kivy.graphics import Color
 from kivy.graphics import Rectangle
 from kivy.properties import ObjectProperty
+from kivy.uix.popup import Popup
+import sqlite3 as sql
+
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
@@ -82,11 +85,19 @@ class WindowManager(ScreenManager):
 class MainMenu(Screen):
     username = ObjectProperty(None)
     password = ObjectProperty(None)
-    u="hello"
-    def s(self):
-        Login()
-        print(self.username.text)
 
+    def check(self):
+        db_connection()
+        cmd = f"select * from xyz where username='{self.username.text}'"
+        db_execute_fetch(cmd)
+        if data:
+            pass
+
+
+        else:
+            error = "Username Does Not Exist....."
+            pp = Popup(title='warning', content=error, size=(300,200), size_hint=(None,None))
+            pp.open()
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 class Login(Screen):
