@@ -90,18 +90,21 @@ class MainMenu(Screen):
         db_connection()
         cmd = f"select * from xyz where username='{self.username.text}'"
         db_execute_fetch(cmd)
+        print(data)
         if data:
             pass
 
 
         else:
             error = "Username Does Not Exist....."
-            pp = Popup(title='warning', content=error, size=(300,200), size_hint=(None,None))
-            pp.open()
+            fl = FloatLayout()
+            fl.add_widget(Label(text=error))
+            Popup(title='warning', content=fl, size=(300,200), size_hint=(None,None)).open()
+            print(error)
+
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 class Login(Screen):
-    print("hello")
     pass
 
 
