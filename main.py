@@ -92,20 +92,23 @@ class MainMenu(Screen):
         db_execute_fetch(cmd)
         print(data)
         if data:
-            pass
-
+            if self.password.text == data[5]:
+                self.manager.current = 'login'
 
         else:
             error = "Username Does Not Exist....."
-            fl = FloatLayout()
-            fl.add_widget(Label(text=error))
-            Popup(title='warning', content=fl, size=(300,200), size_hint=(None,None)).open()
-            print(error)
+            Popup(title='warning', content=Label(text=error), size=(300,200), size_hint=(None,None)).open()
+
 
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 class Login(Screen):
     pass
+
+
+class Debit(Screen):
+    pass
+
 
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""

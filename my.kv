@@ -1,6 +1,8 @@
 <WindowManager>:
     MainMenu:
     Login:
+    Debit:
+
 
 
 # **********************************************************************************************************************
@@ -65,7 +67,64 @@
 
 <Login>:
     name : 'login'
-    Label :
-        text : "hello"
 
+    FloatLayout :
+        size : ['100dp','100dp']
+        size_hint: [1/2, 1/2]
+        pos_hint: {'x':0.2, 'y':0.3}
+        color : [1,1,0,1]
+
+
+        Button:
+            text : "Debit"
+            size_hint : [0.2,0.2]
+            pos_hint : {'x':0.4, 'y':0.5}
+            on_pree : root.manager.current='debit'
+
+        Button:
+            text : "Credit"
+            size_hint : [0.2,0.2]
+            pos_hint : {'x':0.7, 'y':0.5}
+
+        Button:
+            text : "Check Balance"
+            size_hint : [0.2,0.2]
+            pos_hint : {'x':0.4, 'y':0.25}
+
+        Button :
+            text : "Profile"
+            size_hint : [0.2,0.2]
+            pos_hint : {'x':0.7, 'y':0.25}
+
+        Button:
+            text : "Setting"
+            size_hint : [0.2,0.2]
+            pos_hint : {'x':0.5, 'y':0.01}
+
+    Button:
+        text : "Logout"
+        size_hint : [0.1,0.1]
+        pos_hint : {'right':1, 'top':1}
+
+
+#******************************************************************************************************************
+<Debit>
+    name : 'debit'
+
+    FloatLayout:
+        Label :
+            text : "Amount"
+            font_size : 25
+            size_hint : [0.2,0.2]
+            pos_hint : {'x':0.4, 'y':0.5}
+
+        TextInput :
+            multiline : False
+            write_tab : False
+            size_hint : [0.2,0.2]
+            pos_hint : {'x':0.6, 'y':0.5}
+
+        Button :
+            text : "Back"
+            size_hint :
 
