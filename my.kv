@@ -79,7 +79,9 @@
             text : "Debit"
             size_hint : [0.2,0.2]
             pos_hint : {'x':0.4, 'y':0.5}
-            on_pree : root.manager.current='debit'
+            on_press :
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'debit'
 
         Button:
             text : "Credit"
@@ -110,21 +112,33 @@
 #******************************************************************************************************************
 <Debit>
     name : 'debit'
-
     FloatLayout:
         Label :
             text : "Amount"
             font_size : 25
-            size_hint : [0.2,0.2]
+            size_hint : [0.1,0.1]
             pos_hint : {'x':0.4, 'y':0.5}
 
         TextInput :
             multiline : False
             write_tab : False
-            size_hint : [0.2,0.2]
+            size_hint : [0.1,0.1]
             pos_hint : {'x':0.6, 'y':0.5}
 
         Button :
             text : "Back"
-            size_hint :
+            size_hint : [0.1,0.1]
+            pos_hint : {'x':0.4, 'y':0.3}
+            on_press :
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'login'
+
+
+        Button :
+            text : "Update"
+            size_hint : [0.1,0.1]
+            pos_hint : {'x':0.6, 'y':0.3}
+            on_press : root.manager.current = 'login'
+
+
 

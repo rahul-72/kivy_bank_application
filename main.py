@@ -9,7 +9,7 @@ from kivy.graphics import Rectangle
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
 import sqlite3 as sql
-
+from kivy.uix.widget import Widget
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
