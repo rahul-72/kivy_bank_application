@@ -10,6 +10,7 @@ from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
 import sqlite3 as sql
 from kivy.uix.widget import Widget
+from kivy.properties import NumericProperty
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
@@ -107,7 +108,16 @@ class Login(Screen):
 
 
 class Debit(Screen):
+    amount = ObjectProperty(None)
+    """amount = int(str(amount))
+    def amount_check(self):
+        if amount > data[3]:
+            self.p = Popup(text='Warning', content=Label(text='You Do Not Have Sufficient Amount.....'), size_hint=(None,None), size=(400,400))
+            self.p.open()
+
+        else:"""
     pass
+
 
 
 

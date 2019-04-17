@@ -1,7 +1,7 @@
 from kivy.app import App
 from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
-
+from kivy.uix.dropdown import DropDown
 
 class MyPracticeApp(App):
     def build(self):
@@ -9,11 +9,13 @@ class MyPracticeApp(App):
 
 class Debit(Widget):
     def debit(self):
-        print("hi")
         Hello()
 
+
 class Hello:
-    print("Hello world")
+    print("Hello")
+
+
 
 if __name__ == "__main__":
     MyPracticeApp().run()

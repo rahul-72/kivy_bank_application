@@ -1,3 +1,10 @@
-name = input("enter")
-if name =='rahul':
-    print("hello")
+class A:
+    def hello(self):
+        Hello()
+
+
+class Hello:
+    print("hello world")
+
+a=A()
+a.hello()

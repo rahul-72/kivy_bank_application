@@ -62,6 +62,12 @@
             size_hint : (0.2, 0.1)
             pos : 650, 250
 
+        TextInput:
+            pos_hint: {'x': 0.505455, 'y': 0.134286}
+            size_hint_y: 0.1
+            size_hint_x: 0.3
+            text: 'Text Content'
+
 
 # *********************************************************************************************************************
 
@@ -112,6 +118,7 @@
 #******************************************************************************************************************
 <Debit>
     name : 'debit'
+    amount : amount
     FloatLayout:
         Label :
             text : "Amount"
@@ -120,6 +127,7 @@
             pos_hint : {'x':0.4, 'y':0.5}
 
         TextInput :
+            id : amount
             multiline : False
             write_tab : False
             size_hint : [0.1,0.1]
@@ -138,7 +146,7 @@
             text : "Update"
             size_hint : [0.1,0.1]
             pos_hint : {'x':0.6, 'y':0.3}
-            on_press : root.manager.current = 'login'
+            on_press : root.amount_check()
 
 
 
