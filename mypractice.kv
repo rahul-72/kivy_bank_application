@@ -1,6 +1,15 @@
-<Debit>
-    Button:
-        text : 'popup'
-        size_hint : 0.2,0.2
-        on_press : root.debit()
+<Menu>:
+    username : username
+    GridLayout:
+        cols :1
+        TextInput:
+            id : username
+            size_hint : 0.2,0.2
+
+        Button:
+            text : 'Submit'
+            size_hint : 0.2,0.2
+            on_press : root.debit()
+
+
 

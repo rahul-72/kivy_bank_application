@@ -4,6 +4,7 @@ class A:
 
 
 class Hello:
+    print("Hi world")
     print("hello world")
 
 a=A()

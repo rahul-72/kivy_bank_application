@@ -6,11 +6,11 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.graphics import Color
 from kivy.graphics import Rectangle
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, StringProperty, NumericProperty
 from kivy.uix.popup import Popup
 import sqlite3 as sql
 from kivy.uix.widget import Widget
-from kivy.properties import NumericProperty
+
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
@@ -84,17 +84,25 @@ class WindowManager(ScreenManager):
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
 class MainMenu(Screen):
-    username = ObjectProperty(None)
-    password = ObjectProperty(None)
+    #username = StringProperty(None)
+    #password = ObjectProperty(None)
 
     def check(self):
         db_connection()
+        print(self.username.text)
+        print(type(self.username.text))
+        print(self.ids['password'].text)
         cmd = f"select * from xyz where username='{self.username.text}'"
         db_execute_fetch(cmd)
         print(data)
         if data:
             if self.password.text == data[5]:
                 self.manager.current = 'login'
+
+            else:
+                error = "Invalid Password....."
+                Popup(title='warning', content=Label(text=error), size=(300, 200), size_hint=(None, None)).open()
+
 
         else:
             error = "Username Does Not Exist....."
@@ -108,15 +116,17 @@ class Login(Screen):
 
 
 class Debit(Screen):
-    amount = ObjectProperty(None)
-    """amount = int(str(amount))
-    def amount_check(self):
-        if amount > data[3]:
-            self.p = Popup(text='Warning', content=Label(text='You Do Not Have Sufficient Amount.....'), size_hint=(None,None), size=(400,400))
-            self.p.open()
+    #amount = ObjectProperty(None)
 
-        else:"""
-    pass
+    def amount_check(self):
+        self.amount = int(self.ids['amount'].text)
+        if self.amount > data[3]:
+            print("hiii")
+            Popup(title='Warning', content=Label(text='You Do Not Have Sufficient Amount.....'), size=(400,400), size_hint=(None,None)).open()
+
+
+        else:
+            pass
 
 
 
