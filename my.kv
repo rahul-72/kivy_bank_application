@@ -184,6 +184,20 @@
                     size: 100,100
                     on_press: root.btn_name('phone_number')
 
+        TabbedPanelItem:
+            text: 'Logout'
+            FloatLayout:
+                Label:
+                    size_hint: 0.2,0.1
+                    pos_hint: {'x':0.5, 'y':0.5}
+                    text: 'Are You Sure You Want To Logout......'
+
+                Button:
+                    size_hint: 0.1,0.1
+                    pos_hint: {'x':0.5, 'y':0.4}
+                    text: 'Yes'
+                    on_press: root.manager.current = 'mainmenu'
+
 
 
 

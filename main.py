@@ -104,6 +104,8 @@ class MainMenu(Screen):
             if self.password.text == data[5]:
                 username = self.username.text
                 password = self.password.text
+                self.username.text = ''
+                self.password.text = ''
 
                 self.manager.current = 'login'
 
@@ -177,6 +179,9 @@ class Login(Screen):
         elif value == 'password':
             pass
 
+
+    def logout(self):
+        pass
 """****************************************************************************************************************"""
 
 class MyPopup_name(Popup):
