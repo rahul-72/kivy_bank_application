@@ -1,33 +1,17 @@
 from kivy.app import App
-from kivy.lang import Builder
+from kivy.uix.button import Button
+from kivy.uix.popup import Popup
+from kivy.uix.floatlayout import FloatLayout
 
-KV = """
 
-#:import NoTransition kivy.uix.screenmanager.NoTransition
-
-BoxLayout:
-    orientation: "vertical"
-    Label:
-        text: "top"
-    ScreenManager:
-        id: sm
-        transition: NoTransition()
-        Screen:
-            name: "screen1"
-            Button:
-                text: "screen 2"
-                on_release: sm.current = "screen2"
-        Screen:
-            name: "screen2"
-            Button:
-                text: "screen 1"
-                on_release: sm.current = "screen1"
-    Label:
-        text: "bottom"
-"""
-
-class TestApp(App):
+class MyApp(App):
     def build(self):
-        return Builder.load_string(KV)
+        return Hello()
 
-TestApp().run()
+
+class
+
+
+
+if __name__=="__main__":
+    MyApp().run()

@@ -6,12 +6,13 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.graphics import Color
 from kivy.graphics import Rectangle
-from kivy.properties import ObjectProperty, StringProperty, NumericProperty
 from kivy.uix.popup import Popup
 import sqlite3 as sql
 from kivy.uix.widget import Widget
-
-
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.tabbedpanel import TabbedPanel
+from kivy.properties import ListProperty, ObjectProperty
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
 # creating functions for sqlite3 database.
@@ -82,21 +83,28 @@ class WindowManager(ScreenManager):
     pass
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
+# Declaring global username and password...
+username = ''
+password = ''
 
+"""********************************************************************************************************"""
 class MainMenu(Screen):
-    #username = StringProperty(None)
-    #password = ObjectProperty(None)
+
 
     def check(self):
+        global username, password
         db_connection()
-        print(self.username.text)
-        print(type(self.username.text))
-        print(self.ids['password'].text)
+
         cmd = f"select * from xyz where username='{self.username.text}'"
         db_execute_fetch(cmd)
         print(data)
+
+
         if data:
             if self.password.text == data[5]:
+                username = self.username.text
+                password = self.password.text
+
                 self.manager.current = 'login'
 
             else:
@@ -112,24 +120,93 @@ class MainMenu(Screen):
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 class Login(Screen):
-    pass
+    data_cls = ObjectProperty()
+    data_cls = data
 
 
-class Debit(Screen):
-    #amount = ObjectProperty(None)
+    def update_debit(self):
+        if self.ids['amount_debit'].text.isdigit():
+            self.amount = int(self.ids['amount_debit'].text)
+            if self.amount > data[3]:
+                print("hiii")
+                print(self.data_cls)
+                print(data)
 
-    def amount_check(self):
-        self.amount = int(self.ids['amount'].text)
-        if self.amount > data[3]:
-            print("hiii")
-            Popup(title='Warning', content=Label(text='You Do Not Have Sufficient Amount.....'), size=(400,400), size_hint=(None,None)).open()
+                Popup(title='Warning', content=Label(text='You Do Not Have Sufficient Amount.....'), size=(400, 400),
+                      size_hint=(None, None)).open()
+                self.ids['amount_debit'].text = ''
+
+
+            else:
+                new_amount = data[3] - self.amount
+                cmd1 = f"update xyz set balance='{new_amount}' where username='{username}' "
+                db_execute_insert(cmd1)
+
+                Popup(title='Warning', content=Label(text=f'****Rs {self.amount} is Debitted \n Successfully From Your Account****'), size=(400, 400),
+                      size_hint=(None, None)).open()
+                self.ids['amount_debit'].text = ''
+
+        else:
+            Popup(title='Warning', content=Label(text='Please Enter Only Numerical Digit.....'), size=(400, 400),
+                  size_hint=(None, None)).open()
+
+
+        """*******************************************************************************************************"""
+
+    def update_credit(self):
+        if self.ids['amount_credit'].text.isdigit():
+            self.amount = int(self.ids['amount_credit'].text)
+
+            new_amount = data[3] + self.amount
+            cmd1 = f"update xyz set balance='{new_amount}' where username='{username}' "
+            db_execute_insert(cmd1)
+
+            Popup(title='Warning', content=Label(text='****Your Amount is Updated Successfuly****'),
+                  size=(400, 400),
+                  size_hint=(None, None)).open()
+            self.ids['amount_credit'].text = ''
+
+        else:
+            Popup(title='Warning', content=Label(text='Please Enter Only Numerical Digit.....'), size=(400, 400),
+                  size_hint=(None, None)).open()
+
+    """**************************************************************************************"""
+    def btn_name(self,value):
+        if value == 'name':
+            return MyPopup_name().open()
+        elif value == 'password':
+            pass
+
+"""****************************************************************************************************************"""
+
+class MyPopup_name(Popup):
+
+    def btn(self):
+        if self.ids['new_first_name'].text:
+            cmd1 = f"update xyz set first_name='{self.ids['new_first_name'].text}' where username='{username}'"
+            db_execute_fetch(cmd1)
+
+            cmd2 = f"update xyz set last_name='{self.ids['new_last_name'].text}' where username='{username}'"
+            db_execute_fetch(cmd2)
+
+            Popup(title='Update', content=Label(text='First and Last Name are\n updated Successfully....'), size=(300, 300),
+                  size_hint=(None, None)).open()
+            self.ids['new_first_name'].text = ''
+            self.ids['new_last_name'].text = ''
 
 
         else:
-            pass
+            Popup(title='Warning', content=Label(text='First Name is Mandatory....'), size=(200, 200),
+                size_hint=(None, None)).open()
 
+class MyPopup_password(Popup):
+    pass
 
+class MyPopup_email(Popup):
+    pass
 
+class MyPopup_phone_number(Popup):
+    pass
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 

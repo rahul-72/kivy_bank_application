@@ -1,23 +1,32 @@
 from kivy.app import App
-from kivy.uix.popup import Popup
-from kivy.uix.widget import Widget
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.button import Button
-from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
+from kivy.properties import ObjectProperty
+from kivy.uix.widget import Widget
+from kivy.uix.screenmanager import Screen,ScreenManager
+
+
+data = None
+
+def hi():
+    global data
+    data = ('harry', 26)
 
 class MyPracticeApp(App):
     def build(self):
         return Menu()
 
-class Menu(Widget):
-    def debit(self):
-        if self.ids['username'].text == 'hello':
-            pass
-        else:
-            error = "Username Does Not Exist....."
-            Popup(title='warning', content=Label(text=error), size=(300, 200), size_hint=(None, None)).open()
+class Menu(ScreenManager):
+    pass
 
+class Debit(Screen):
+    def btn(self):
+        hi()
+        print(data)
+        self.manager.current='credit'
+
+class Credit(Screen):
+    data_cls = ObjectProperty(None)
+    data_cls = data
 
 
 if __name__ == "__main__":

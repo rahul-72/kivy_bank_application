@@ -1,15 +1,15 @@
 <Menu>:
-    username : username
-    GridLayout:
-        cols :1
-        TextInput:
-            id : username
-            size_hint : 0.2,0.2
-
-        Button:
-            text : 'Submit'
-            size_hint : 0.2,0.2
-            on_press : root.debit()
+    Debit:
+    Credit
 
 
+<Debit>:
+    name: 'debit'
+    Button:
+        text: 'btn1'
+        on_press : root.btn()
 
+<Credit>:
+    name: 'credit'
+    Label:
+        text: f' {root.data_cls}'

@@ -1,7 +1,7 @@
 <WindowManager>:
     MainMenu:
     Login:
-    Debit:
+
 
 
 
@@ -68,80 +68,156 @@
 
 <Login>:
     name : 'login'
+    amount_debit: amount_debit
+    amount_credit: amount_credit
+    TabbedPanel:
+        TabbedPanelItem:
+            text: "Debit"
+            FloatLayout:
+                Label:
+                    text: 'Debit Amount:-->>'
+                    font_size : 25
+                    size_hint : 0.2, 0.3
+                    pos : 400,300
 
-    FloatLayout :
-        size : ['100dp','100dp']
-        size_hint: [1/2, 1/2]
-        pos_hint: {'x':0.2, 'y':0.3}
-        color : [1,1,0,1]
+                TextInput:
+                    id: amount_debit
+                    multiline: False
+                    write_tab : False
+                    size_hint : 0.15, 0.1
+                    pos : 650,350
+                Button:
+                    text: 'Update'
+                    size_hint : (0.15, 0.1)
+                    pos : 450, 250
+                    on_press: root.update_debit()
+
+        TabbedPanelItem:
+            text: "Credit"
+            FloatLayout:
+                Label:
+                    text: 'Credit Amount:-->>'
+                    font_size : 25
+                    size_hint : 0.2, 0.3
+                    pos : 400,300
+
+                TextInput:
+                    id: amount_credit
+                    multiline: False
+                    write_tab : False
+                    size_hint : 0.15, 0.1
+                    pos : 650,350
+                Button:
+                    text: 'Update'
+                    size_hint : (0.15, 0.1)
+                    pos : 450, 250
+                    on_press: root.update_credit()
 
 
-        Button:
-            text : "Debit"
-            size_hint : [0.2,0.2]
-            pos_hint : {'x':0.4, 'y':0.5}
-            on_press :
-                root.manager.transition.direction = 'left'
-                root.manager.current = 'debit'
+        TabbedPanelItem:
+            text: 'Check Balance'
+            Label:
+                text: f'*****Your Account Balance {root.data_cls} '
 
-        Button:
-            text : "Credit"
-            size_hint : [0.2,0.2]
-            pos_hint : {'x':0.7, 'y':0.5}
+        TabbedPanelItem:
+            text: 'Profile'
+            GridLayout:
+                cols: 2
+                size_hint: None,None
+                size: 600,600
+                Label:
+                    text: 'Name:-->> '
 
-        Button:
-            text : "Check Balance"
-            size_hint : [0.2,0.2]
-            pos_hint : {'x':0.4, 'y':0.25}
+                Label:
+                    text: f'{root.data_cls} '
+                Label:
+                    text: 'Username:-->> '
+                Label:
+                    text: f'{root.data_cls} '
+                Label:
+                    text: 'Account Number:-->> '
+                Label:
+                    text: f'{root.data_cls} '
+                Label:
+                    text: 'Balance:-->> '
+                Label:
+                    text: f'{root.data_cls} '
+                Label:
+                    text: 'Email:-->> '
+                Label:
+                    text: f'{root.data_cls} '
+                Label:
+                    text: 'Phone Number:-->> '
+                Label:
+                    text: f'{root.data_cls} '
 
-        Button :
-            text : "Profile"
-            size_hint : [0.2,0.2]
-            pos_hint : {'x':0.7, 'y':0.25}
 
-        Button:
-            text : "Setting"
-            size_hint : [0.2,0.2]
-            pos_hint : {'x':0.5, 'y':0.01}
+        TabbedPanelItem:
+            text: 'Setting'
+            GridLayout:
+                cols: 2
+                size_hint: None, None
+                size: 600,600
+                spacing: 30
+                pos_hint: {'x':0.5, 'y':0.5}
+                Button:
+                    text: 'Name'
+                    size_hint: None, None
+                    size: 100,100
+                    on_press: root.btn_name('name')
 
-    Button:
-        text : "Logout"
-        size_hint : [0.1,0.1]
-        pos_hint : {'right':1, 'top':1}
+                Button:
+                    text: 'Password'
+                    size_hint: None, None
+                    size: 100,100
+                    on_press: root.btn_name('password')
+
+                Button:
+                    text: 'Email'
+                    size_hint: None, None
+                    size: 100,100
+                    on_press: root.btn_name('email')
+
+                Button:
+                    text: 'Phone Number'
+                    size_hint: None, None
+                    size: 100,100
+                    on_press: root.btn_name('phone_number')
+
+
+
 
 
 #******************************************************************************************************************
-<Debit>
-    name : 'debit'
-    amount : amount
-    FloatLayout:
-        Label :
-            text : "Amount"
-            font_size : 25
-            size_hint : [0.1,0.1]
-            pos_hint : {'x':0.4, 'y':0.5}
+<MyPopup_name>:
+    new_first_name: new_first_name
+    new_last_name: new_last_name
+    size_hint: None,None
+    size: 600,600
+    title: 'Name'
+    GridLayout:
+        cols: 2
+        spacing: 20
+        padding: 40
+        Label:
+            text: 'First Name:-->> '
+        TextInput:
+            id : new_first_name
+            write_tab: False
+            multiline: False
+            #size_hint: 0.5,0.1
+            size_hint_y: None
+            height: 70
+        Label:
+            text: 'Last Name:-->> '
+        TextInput:
+            id: new_last_name
+            write_tab: False
+            multiline: False
+            #size_hint: 0.5,0.1
+            size_hint_y: None
+            height: 70
 
-        TextInput :
-            id : amount
-            multiline : False
-            write_tab : False
-            size_hint : [0.1,0.1]
-            pos_hint : {'x':0.6, 'y':0.5}
-
-        Button :
-            text : "Back"
-            size_hint : [0.1,0.1]
-            pos_hint : {'x':0.4, 'y':0.3}
-            on_press :
-                root.manager.transition.direction = 'right'
-                root.manager.current = 'login'
-
-
-        Button :
-            text : "Update"
-            size_hint : [0.1,0.1]
-            pos_hint : {'x':0.6, 'y':0.3}
-            on_press : root.amount_check()
-
-
-
+        Button:
+            text: 'Update'
+            on_press: root.btn()
