@@ -76,6 +76,8 @@ def db_close():
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 class MyApp(App):
+    title = "XYZ Bank"
+    icon = 'static/icons/5.ico'
     def build(self):
         return WindowManager()
 
