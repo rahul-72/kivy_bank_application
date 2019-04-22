@@ -13,6 +13,8 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.properties import ListProperty, ObjectProperty
+from random import randint
+
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
 # creating functions for sqlite3 database.
@@ -110,7 +112,7 @@ class MainMenu(Screen):
                 self.username.text = ''
                 self.password.text = ''
                 Login.data_cls = data
-                #setattr(Login, 'data_cls', data)
+
                 self.manager.current = 'login'
 
             else:
@@ -126,9 +128,7 @@ class MainMenu(Screen):
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 class Login(Screen):
-    #data_cls = ObjectProperty()
-    data_cls = ''
-
+    data_cls = ObjectProperty((1,2,3,4,5,6,7,8))
 
 
     def update_debit(self):
@@ -220,5 +220,113 @@ class MyPopup_phone_number(Popup):
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 
+class Signup(Screen):
+    def signup(self):
+        if self.ids['username'].text:
+            if self.ids['first_name'].text:
+                if self.ids['password'].text:
+                    if self.ids['email'].text:
+                        if self.ids['phone_number'].text:
+                            cmd = f"select * from xyz where username='{self.ids['username'].text}'"
+                            db_connection()
+                            db_execute_fetch(cmd)
+
+                            if not data:
+                                if self.ids['password'].text== self.ids['verify_password'].text:
+
+                                    while True:
+                                        q, w, e, r, t, y, u, i, o, p, l = map(str, [randint(0, 9) for i in range(11)])
+                                        """Assigning 11 random number to update
+                                        account-number in database."""
+                                        a = q + w + e + r + t + y + u + i + o + p + l
+
+                                        cmd1 = "select * from xyz where account_number='{a}'"
+                                        # Here I am not database' functions which I created above.
+                                        cursor.execute(cmd1)
+                                        data1 = cursor.fetchall()
+                                        if data1:
+                                            """checking whether a randomly generated account number is already
+                                            in bank database or not."""
+                                            continue
+                                        else:
+                                            break
+
+
+
+                                    if len(self.ids['phone_number'].text) == 10:
+                                        try:
+
+                                            int_phone_number = int(self.ids['phone_number'].text)
+                                            cmd2 = f"insert into xyz values('{ self.ids['username'].text}','{ self.ids['first_name'].text}','{self.ids['last_name'].text}',0,'{a}','{ self.ids['password'].text}','{self.ids['email'].text}','{int_phone_number}')"
+                                            db_execute_insert(cmd2)
+                                            db_close()
+
+                                            self.name = self.ids['first_name'].text.title() + ''+ self.ids['last_name'].text.title()
+
+                                            Popup(title='Warning',
+                                                  content=Label(text=f'Hello {self.name}...\nAccount Is Successfully Created With Initial Balance Of  Rs 0  \n...Your Account Number is -->> {a}..........\n Enjoy The Services Of XYZ Bank....Have A Nice Day...'),
+                                                  size=(700, 400),
+                                                  size_hint=(None, None)).open()
+
+                                            self.ids['username'].text = ''
+                                            self.ids['first_name'].text = ''
+                                            self.ids['last_name'].text = ''
+                                            self.ids['password'].text = ''
+                                            self.ids['verify_password'].text = ''
+                                            self.ids['email'].text = ''
+                                            self.ids['phone_number'].text = ''
+
+                                            self.manager.current = 'mainmenu'
+
+                                        except Exception as e:
+                                            print(e)
+                                            Popup(title='Warning',
+                                                  content=Label(text='Enter Only Digits in Phone  number..'),
+                                                  size=(400, 200),
+                                                  size_hint=(None, None)).open()
+
+                                            self.ids['password'].text = ''
+                                            self.ids['verify_password'].text = ''
+
+
+
+
+                                    else:
+                                        Popup(title='Warning', content=Label(text='Enter Only 10 Digits Phone Number..'),
+                                              size=(400, 200),
+                                              size_hint=(None, None)).open()
+
+                                else:
+                                    Popup(title='Warning', content=Label(text='Password Verification is Failed...'),
+                                          size=(400, 200),
+                                          size_hint=(None, None)).open()
+
+                            else:
+                                Popup(title='Warning', content=Label(text='UserName has already been taken.\n Please Choose Another UserName..'),
+                                      size=(500, 200),
+                                      size_hint=(None, None)).open()
+
+
+                        else:
+                            Popup(title='Warning', content=Label(text='Phone Number is Mandatory....'), size=(400, 200),
+                                  size_hint=(None, None)).open()
+
+                    else:
+                        Popup(title='Warning', content=Label(text='Email is Mandatory....'), size=(400, 200),
+                              size_hint=(None, None)).open()
+
+                else:
+                    Popup(title='Warning', content=Label(text='Password is Mandatory....'), size=(400, 200),
+                          size_hint=(None, None)).open()
+
+            else:
+                Popup(title='Warning', content=Label(text='First Name is Mandatory....'), size=(400, 200),
+                      size_hint=(None, None)).open()
+
+        else:
+            Popup(title='Warning', content=Label(text='Username is Mandatory....'), size=(400, 200),
+                  size_hint=(None, None)).open()
+
+"""================================================================================================================"""
 if __name__ == "__main__":
     MyApp().run()

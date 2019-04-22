@@ -1,6 +1,7 @@
 <WindowManager>:
     MainMenu:
     Login:
+    Signup:
 
 
 
@@ -53,7 +54,8 @@
             text : "Login"
             size_hint : (0.2, 0.1)
             pos : 450, 250
-            on_press : root.check()
+            on_press :
+                root.check()
 
 
 
@@ -61,6 +63,9 @@
             text : "Signup"
             size_hint : (0.2, 0.1)
             pos : 650, 250
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'signup'
 
 
 
@@ -70,6 +75,7 @@
     name : 'login'
     amount_debit: amount_debit
     amount_credit: amount_credit
+    label: label
     TabbedPanel:
         TabbedPanelItem:
             text: "Debit"
@@ -129,7 +135,8 @@
                     text: 'Name:-->> '
 
                 Label:
-                    text: f'{root.data_cls} '
+                    id : label
+                    text: f'{root.data_cls[1]}'
                 Label:
                     text: 'Username:-->> '
                 Label:
@@ -235,3 +242,91 @@
         Button:
             text: 'Update'
             on_press: root.btn()
+
+
+# *******************************************************************************************************************
+
+<Signup>:
+    name: 'signup'
+    GridLayout:
+        cols: 2
+        size_hint: None,None
+        size: 800,700
+        spacing: 30
+        padding: 20
+        Label:
+            text: 'UserName'
+
+        TextInput:
+            id: username
+            multiline: False
+            write_tab: False
+        Label:
+            text: 'First Name'
+
+        TextInput:
+            id: first_name
+            multiline: False
+            write_tab: False
+        Label:
+            text: 'Last Name'
+
+        TextInput:
+            id: last_name
+            multiline: False
+            write_tab: False
+        Label:
+            text: 'PassWord'
+
+        TextInput:
+            id: password
+            multiline: False
+            write_tab: False
+        Label:
+            text: 'Verify Passowrd'
+
+        TextInput:
+            id: verify_password
+            multiline: False
+            write_tab: False
+
+        Label:
+            text: 'Email'
+
+        TextInput:
+            id: email
+            multiline: False
+            write_tab: False
+
+        Label:
+            text: 'Phone Number'
+
+        TextInput:
+            id: phone_number
+            multiline: False
+            write_tab: False
+
+        Button:
+            text: 'Login'
+            size_hint: None,None
+            size: 140,80
+            on_press:
+                username.text= ''
+                first_name.text= ''
+                last_name.text= ''
+                password.text= ''
+                verify_password.text= ''
+                email.text= ''
+                phone_number.text= ''
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'mainmenu'
+
+
+        Button:
+            text: 'Signup'
+            size_hint: None,None
+            size: 140,80
+            on_press: root.signup()
+
+
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
