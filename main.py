@@ -80,6 +80,7 @@ class MyApp(App):
         return WindowManager()
 
 class WindowManager(ScreenManager):
+
     pass
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
@@ -106,7 +107,8 @@ class MainMenu(Screen):
                 password = self.password.text
                 self.username.text = ''
                 self.password.text = ''
-
+                Login.data_cls = data
+                #setattr(Login, 'data_cls', data)
                 self.manager.current = 'login'
 
             else:
@@ -122,8 +124,9 @@ class MainMenu(Screen):
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 class Login(Screen):
-    data_cls = ObjectProperty()
-    data_cls = data
+    #data_cls = ObjectProperty()
+    data_cls = ''
+
 
 
     def update_debit(self):
