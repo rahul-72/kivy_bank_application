@@ -1,6 +1,11 @@
 <WindowManager>:
     MainMenu:
+        id: main_menu_id
+
+
     Login:
+        data_login: main_menu_id.data_mainmenu
+        name_login: main_menu_id.name
     Signup:
 
 
@@ -9,7 +14,7 @@
 # **********************************************************************************************************************
 
 <MainMenu>:
-    name : "mainmenu"
+    name : 'mainmenu'
     username : username
     password : password
     FloatLayout:
@@ -124,7 +129,7 @@
         TabbedPanelItem:
             text: 'Check Balance'
             Label:
-                text: f'*****Your Account Balance {root.data_cls} '
+                text: f'*****Your Account Balance is   {str(root.data_login[3])} *************  '
 
         TabbedPanelItem:
             text: 'Profile'
@@ -137,27 +142,27 @@
 
                 Label:
                     id : label
-                    text: f'{root.data_cls[1]}'
+                    text: str(root.name_login)
                 Label:
                     text: 'Username:-->> '
                 Label:
-                    text: f'{root.data_cls} '
+                    text: str(root.data_login[0])
                 Label:
                     text: 'Account Number:-->> '
                 Label:
-                    text: f'{root.data_cls} '
+                    text: str(root.data_login[4])
                 Label:
                     text: 'Balance:-->> '
                 Label:
-                    text: f'{root.data_cls} '
+                    text: str(root.data_login[3])
                 Label:
                     text: 'Email:-->> '
                 Label:
-                    text: f'{root.data_cls} '
+                    text: str(root.data_login[6])
                 Label:
                     text: 'Phone Number:-->> '
                 Label:
-                    text: f'{root.data_cls} '
+                    text: str(root.data_login[7])
 
 
         TabbedPanelItem:
@@ -204,7 +209,8 @@
                     size_hint: 0.1,0.1
                     pos_hint: {'x':0.5, 'y':0.4}
                     text: 'Yes'
-                    on_press: root.manager.current = 'mainmenu'
+                    on_release:
+                        root.manager.current = 'mainmenu'
 
 
 

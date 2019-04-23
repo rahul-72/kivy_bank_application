@@ -94,7 +94,8 @@ password = ''
 
 """********************************************************************************************************"""
 class MainMenu(Screen):
-
+    data_mainmenu = ObjectProperty('qwertyui')
+    name = ObjectProperty('')
 
     def check(self):
         global username, password
@@ -111,8 +112,10 @@ class MainMenu(Screen):
                 password = self.password.text
                 self.username.text = ''
                 self.password.text = ''
-                Login.data_cls = data
-
+                self.data_mainmenu = data
+                self.name = data[1].title() + '  ' + data[2].title()
+                print(self.name)
+                print(self.data_mainmenu)
                 self.manager.current = 'login'
 
             else:
@@ -128,15 +131,16 @@ class MainMenu(Screen):
 
 """XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"""
 class Login(Screen):
-    data_cls = ObjectProperty((1,2,3,4,5,6,7,8))
-
+    data_login = ObjectProperty('helloworld')
+    name_login = ObjectProperty('')
 
     def update_debit(self):
         if self.ids['amount_debit'].text.isdigit():
             self.amount = int(self.ids['amount_debit'].text)
             if self.amount > data[3]:
                 print("hiii")
-                print(self.data_cls)
+                #print(self.data_cls)
+
                 print(data)
 
                 Popup(title='Warning', content=Label(text='You Do Not Have Sufficient Amount.....'), size=(400, 400),
@@ -152,6 +156,14 @@ class Login(Screen):
                 Popup(title='Warning', content=Label(text=f'****Rs {self.amount} is Debitted \n Successfully From Your Account****'), size=(400, 400),
                       size_hint=(None, None)).open()
                 self.ids['amount_debit'].text = ''
+
+                db_close()
+                db_connection()
+
+                cmd = f"select * from xyz where username='{username}'"
+                db_execute_fetch(cmd)
+
+                print(data)
 
         else:
             Popup(title='Warning', content=Label(text='Please Enter Only Numerical Digit.....'), size=(400, 400),
@@ -172,6 +184,16 @@ class Login(Screen):
                   size=(400, 400),
                   size_hint=(None, None)).open()
             self.ids['amount_credit'].text = ''
+
+            db_close()
+            db_connection()
+
+            cmd = f"select * from xyz where username='{username}'"
+            db_execute_fetch(cmd)
+            MainMenu.data_mainmenu = data
+            print(MainMenu.data_mainmenu)
+
+            print(data)
 
         else:
             Popup(title='Warning', content=Label(text='Please Enter Only Numerical Digit.....'), size=(400, 400),

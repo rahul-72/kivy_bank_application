@@ -1,15 +1,16 @@
-<Menu>:
-    Debit:
-    Credit
+#:import Factory kivy.factory.Factory
 
-
-<Debit>:
-    name: 'debit'
+<Hello>:
     Button:
-        text: 'btn1'
-        on_press : root.btn()
+        text:'press'
+        on_press: Factory.Mypopup().open()
 
-<Credit>:
-    name: 'credit'
-    Label:
-        text: f' {root.data_cls}'
+    TextInput:
+        text: root.text_input
+
+
+
+<Mypopup>:
+    Button:
+        text: 'Popup1'
+        on_release: root.btn()
